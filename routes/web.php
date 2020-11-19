@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use\App\Models\Movie;
+use\Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/book', function (Request $request) {
+    $Validator = Validator::make($request->all(),[
+        'name' => 'required|max:255',
+        ]);
+        if ($Validator->fails()) {
+            return redirect('/')
+            ->withInput()
+            ->withErrors($Validator);    
+        } 
+        $book =new Movie;
+        
+        $book->title=$request->name;
+        $book->save();
+        return redirect('/');
+    });
+
+    Route::delete('/book/{book}', function(Movie $book) {
+        $book ->delete();
+        return redirect('/');
+    });
