@@ -5,27 +5,24 @@
   <div class="col-sm-offset-2 col-sm-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        New Movie
+        NewMovie
       </div>
 
-      <div class="panel-body">
-        <!-- Display Validation Errors -->
+      <div class="pane-body">
+        @include('common.errors')
         @include('common.errors')
 
-        <!-- New Book Form -->
         <form action="/movie" method="POST" class="form-horizontal">
           {{ csrf_field() }}
 
-          <!-- Book Name -->
           <div class="form-group">
-            <label for="task-name" class="col-sm-3 control-label">Movie</label>
+            <label for="tasl-name" class="col-sm-3 control-label">Movie</label>
 
             <div class="col-sm-6">
-              <input type="text" name="name" id="book-name" class="form-control" value="{{ old('book') }}">
+              <input type="text" name="name" id="book-name" class="form-control" value="{{old('book')}}">
             </div>
           </div>
 
-          <!-- Add Book Button -->
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
               <button type="submit" class="btn btn-default">
@@ -37,29 +34,28 @@
       </div>
     </div>
 
-    <!-- Books -->
-    @if (count($movies) > 0)
+    @if(count($movies)>0)
     <div class="panel panel-default">
       <div class="panel-heading">
         映画一覧
       </div>
 
-      <div class="panel-body">
+           <div class="panel-body">
         <table class="table table-striped task-table">
           <thead>
-            <th>Book</th>
+            <th>Movie</th>
             <th>&nbsp;</th>
           </thead>
           <tbody>
-            @foreach ($movies as $book)
+            @foreach ($movies as $movie)
             <tr>
               <td class="table-text">
-                <div>{{ $book->title }}</div>
+                <div>{{$movie->title }}</div>
               </td>
 
               <!-- Task Delete Button -->
               <td>
-                <form action="/movie/{{ $book->id }}" method="POST">
+                <form action="/movie/{{ $movie->id }}" method="POST">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
 

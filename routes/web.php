@@ -30,14 +30,14 @@ Route::post('/movie', function (Request $request) {
             ->withInput()
             ->withErrors($Validator);
     }
-    $book = new Movie;
+    $movie = new Movie;
 
-    $book->title = $request->name;
-    $book->save();
+    $movie->title = $request->name;
+    $movie->save();
     return redirect('/');
 });
 
-Route::delete('/movie/{book}', function (Movie $book) {
-    $book->delete();
+Route::delete('/movie/{movie}', function (Movie $movie) {
+    $movie->delete();
     return redirect('/');
 });
