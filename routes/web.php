@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Models\Movie;
 use \Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
+use \Illuminate\Support\Facades\Validator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,27 +16,29 @@ use Illuminate\Support\Facades\Validator;
 */
 
 Route::get('/', function () {
-    $movies = Movie::all();
+    $movies = Movie::get();
     return view('movies', ['movies' => $movies]);
 });
 
 Route::post('/movie', function (Request $request) {
-    $Validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
+    $Validator = Validator::make($request->all(), 
+    ['name=>requiredlmax:255',
     ]);
+
     if ($Validator->fails()) {
         return redirect('/')
-            ->withInput()
+            ->withinput()
             ->withErrors($Validator);
     }
-    $movie = new Movie;
 
+    $movie = new Movie;
     $movie->title = $request->name;
     $movie->save();
     return redirect('/');
 });
 
-Route::delete('/movie/{movie}', function (Movie $movie) {
-    $movie->delete();
-    return redirect('/');
+Route::delete('/movie/{movie}',function(Movie $movie){
+$movie->delete();
+return redirect('/');
+
 });
