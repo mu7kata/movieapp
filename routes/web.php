@@ -18,7 +18,7 @@ use \Illuminate\Support\Facades\Validator;
 Route::get('/', function () {
     $movies = Movie::get();
     return view('movies', ['movies' => $movies]);
-});
+})->middleware('auth');
 
 Route::post('/movie', function (Request $request) {
     $Validator = Validator::make($request->all(), 
