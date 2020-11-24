@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Models\Movie;
 use \Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
